@@ -37,24 +37,57 @@ class Object():
         self.objID = objID
         self.polyID = polyID
         self.position = position
-        self.tifID = tifID
+        self.tifID = int(tifID)
         self.x = x
         self.y = y
 
 
+def createObj(xml,obj_annotation,x_min,y_min,x_max,y_max):
+    object = xml.createElement('object')
+    name = xml.createElement('name')
+    name_txt = xml.createTextNode('1')
+    name.appendChild(name_txt)
+    bndbox = xml.createElement('bndbox')
+    xmin = xml.createElement('xmin')
+    xmin_txt = xml.createTextNode(x_min)
+    xmin.appendChild(xmin_txt)
+    ymin = xml.createElement('ymin')
+    ymin_txt = xml.createTextNode(y_min)
+    ymin.appendChild(ymin_txt)
+    xmax = xml.createElement('xmax')
+    xmax_txt = xml.createTextNode(x_max)
+    xmax.appendChild(xmax_txt)
+    ymax = xml.createElement('ymax')
+    ymax_txt = xml.createTextNode(y_max)
+    ymax.appendChild(ymax_txt)
+    bndbox.appendChild(xmin)
+    bndbox.appendChild(xmax)
+    bndbox.appendChild(ymin)
+    bndbox.appendChild(ymax)
+    object.appendChild(name)
+    object.appendChild(bndbox)
+    obj_annotation.appendChild(object)
+
 def txtToXml(txt_path,xml_path):
     # .txt data to save in txt_data as a Object())
     txt_data = []
+    datanum = 0
     with open(txt_path) as f:
         for line in tqdm(f.readlines()):
             txt = line.strip().split(',')
-            txt_data.append(Object(txt[0],txt[1],txt[2],txt[3],txt[4],txt[5]))
+            if(txt[0] != "OBJECTID"):
+                txt_data.append(Object(txt[0],txt[1],txt[2],txt[3],txt[4],txt[5]))
+                datanum += 1
     f.close()
-    # print(txt_data[1].objID)
+    txt_data.sort(key=lambda x:x.tifID)
+    # print(datanum) 26536
+    # print(txt_data[i].tifID) 6074
 
     # make the xml
     # range need to change according to the number of xml
-    for index in range(6634):  
+    index = 0
+    number = 1
+    while(index < datanum):
         xmldoc = Document()
 
         annotation = xmldoc.createElement('annotation')
@@ -63,7 +96,7 @@ def txtToXml(txt_path,xml_path):
 
         filename = xmldoc.createElement('filename')
         annotation.appendChild(filename)
-        filename_txt = xmldoc.createTextNode(str(index+1).zfill(9) + '.tif')
+        filename_txt = xmldoc.createTextNode(str(number).zfill(9) + '.tif')
         filename.appendChild(filename_txt)
         
         source = xmldoc.createElement('source')
@@ -88,63 +121,43 @@ def txtToXml(txt_path,xml_path):
         size.appendChild(depth)
         annotation.appendChild(size)
 
-        x_min = min(txt_data[index*4+1].x, txt_data[index*4+2].x, txt_data[index*4+3].x, txt_data[index*4+4].x)
-        y_min = min(txt_data[index*4+1].y, txt_data[index*4+2].y, txt_data[index*4+3].y, txt_data[index*4+4].y)
-        x_max = max(txt_data[index*4+1].x, txt_data[index*4+2].x, txt_data[index*4+3].x, txt_data[index*4+4].x)
-        y_max = max(txt_data[index*4+1].y, txt_data[index*4+2].y, txt_data[index*4+3].y, txt_data[index*4+4].y)
-
-        '''
-        x_min = txt_data[index*4 + 1].x
-        y_min = txt_data[index*4 + 1].y
-        x_max = txt_data[index*4 + 1].x
-        y_max = txt_data[index*4 + 1].y
-        for i in range(index*4+1,index*4+5):
-            if(txt_data[i].x < x_min):
-                x_min = txt_data[i].x
-            if(txt_data[i].x > x_max):
-                x_max = txt_data[i].x
-            if(txt_data[i].y < y_min):
-                y_min = txt_data[i].y
-            if(txt_data[i].y > y_max):
-                y_max = txt_data[i].y
-        '''
+        x_min = min(txt_data[index].x, txt_data[index+1].x, txt_data[index+2].x, txt_data[index+3].x)
+        y_min = min(txt_data[index].y, txt_data[index+1].y, txt_data[index+2].y, txt_data[index+3].y)
+        x_max = max(txt_data[index].x, txt_data[index+1].x, txt_data[index+2].x, txt_data[index+3].x)
+        y_max = max(txt_data[index].y, txt_data[index+1].y, txt_data[index+2].y, txt_data[index+3].y)
         
-        object = xmldoc.createElement('object')
-        name = xmldoc.createElement('name')
-        name_txt = xmldoc.createTextNode('1')
-        name.appendChild(name_txt)
-        bndbox = xmldoc.createElement('bndbox')
-        xmin = xmldoc.createElement('xmin')
-        xmin_txt = xmldoc.createTextNode(x_min)
-        xmin.appendChild(xmin_txt)
-        ymin = xmldoc.createElement('ymin')
-        ymin_txt = xmldoc.createTextNode(y_min)
-        ymin.appendChild(ymin_txt)
-        xmax = xmldoc.createElement('xmax')
-        xmax_txt = xmldoc.createTextNode(x_max)
-        xmax.appendChild(xmax_txt)
-        ymax = xmldoc.createElement('ymax')
-        ymax_txt = xmldoc.createTextNode(y_max)
-        ymax.appendChild(ymax_txt)
-        bndbox.appendChild(xmin)
-        bndbox.appendChild(xmax)
-        bndbox.appendChild(ymin)
-        bndbox.appendChild(ymax)
-        object.appendChild(name)
-        object.appendChild(bndbox)
-        annotation.appendChild(object)
-        
+        createObj(xmldoc,annotation,x_min,y_min,x_max,y_max)
+        tif = txt_data[index].tifID
+        if(index + 4 < datanum):
+            next_tif = txt_data[index+4].tifID
+            index += 4
+            while(tif == next_tif and index < datanum):
+                x_min = min(txt_data[index].x, txt_data[index+1].x, txt_data[index+2].x, txt_data[index+3].x)
+                y_min = min(txt_data[index].y, txt_data[index+1].y, txt_data[index+2].y, txt_data[index+3].y)
+                x_max = max(txt_data[index].x, txt_data[index+1].x, txt_data[index+2].x, txt_data[index+3].x)
+                y_max = max(txt_data[index].y, txt_data[index+1].y, txt_data[index+2].y, txt_data[index+3].y)
+                createObj(xmldoc,annotation,x_min,y_min,x_max,y_max)
+                index += 4
+                if(index < datanum):
+                    next_tif = txt_data[index].tifID
+        else:
+            outputfile = str(number).zfill(9) + ".xml"
+            with open(outputfile,'wb') as fw:
+                fw.write(xmldoc.toprettyxml(indent='\t', encoding='utf-8'))
+            fw.close()
+            break
 
         # create the output file
         os.chdir(xml_path)
-        outputfile = str(index+1).zfill(9) + ".xml"
+        outputfile = str(number).zfill(9) + ".xml"
         with open(outputfile,'wb') as fw:
             fw.write(xmldoc.toprettyxml(indent='\t', encoding='utf-8'))
         fw.close()
-
+        number += 1
 
 
 if __name__ == "__main__":
     data_path = os.path.join(os.getcwd(),'Sample_Corner_Point.txt')
     pic_path = os.path.join(os.getcwd(), 'result')
     txtToXml(data_path,pic_path)
+
