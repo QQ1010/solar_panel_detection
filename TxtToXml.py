@@ -88,7 +88,12 @@ def txtToXml(txt_path,xml_path):
         size.appendChild(depth)
         annotation.appendChild(size)
 
-        
+        x_min = min(txt_data[index*4+1].x, txt_data[index*4+2].x, txt_data[index*4+3].x, txt_data[index*4+4].x)
+        y_min = min(txt_data[index*4+1].y, txt_data[index*4+2].y, txt_data[index*4+3].y, txt_data[index*4+4].y)
+        x_max = max(txt_data[index*4+1].x, txt_data[index*4+2].x, txt_data[index*4+3].x, txt_data[index*4+4].x)
+        y_max = max(txt_data[index*4+1].y, txt_data[index*4+2].y, txt_data[index*4+3].y, txt_data[index*4+4].y)
+
+        '''
         x_min = txt_data[index*4 + 1].x
         y_min = txt_data[index*4 + 1].y
         x_max = txt_data[index*4 + 1].x
@@ -102,6 +107,7 @@ def txtToXml(txt_path,xml_path):
                 y_min = txt_data[i].y
             if(txt_data[i].y > y_max):
                 y_max = txt_data[i].y
+        '''
         
         object = xmldoc.createElement('object')
         name = xmldoc.createElement('name')
