@@ -31,6 +31,7 @@
 from xml.dom.minidom import Document
 import os
 from tqdm import tqdm
+from osgeo import gdal
 
 class Object():
     def __init__(self,objID,polyID,position,tifID,x,y):
@@ -68,7 +69,9 @@ def createObj(xml,obj_annotation,x_min,y_min,x_max,y_max):
     object.appendChild(bndbox)
     obj_annotation.appendChild(object)
 
-def txtToXml(txt_path,xml_path):
+def txtToXml(txt_path,xml_path,tif_path):
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
     # .txt data to save in txt_data as a Object())
     txt_data = []
     datanum = 0
@@ -81,13 +84,15 @@ def txtToXml(txt_path,xml_path):
     f.close()
     txt_data.sort(key=lambda x:x.tifID)
     # print(datanum) 26536
-    # print(txt_data[i].tifID) 6074
+    # print(txt_data[datanum].tifID) 6074
 
     # make the xml
     # range need to change according to the number of xml
     index = 0
-    number = 1
     while(index < datanum):
+        os.chdir(tif_path)
+        tif_file = gdal.Open('Sample50_' + str(txt_data[index].tifID) +'.tif')
+
         xmldoc = Document()
 
         annotation = xmldoc.createElement('annotation')
@@ -96,7 +101,7 @@ def txtToXml(txt_path,xml_path):
 
         filename = xmldoc.createElement('filename')
         annotation.appendChild(filename)
-        filename_txt = xmldoc.createTextNode(str(number).zfill(9) + '.tif')
+        filename_txt = xmldoc.createTextNode(str(txt_data[index].tifID).zfill(9) + '.tif')
         filename.appendChild(filename_txt)
         
         source = xmldoc.createElement('source')
@@ -108,10 +113,10 @@ def txtToXml(txt_path,xml_path):
 
         size = xmldoc.createElement('size')
         width = xmldoc.createElement('width')
-        width_txt = xmldoc.createTextNode('256')
+        width_txt = xmldoc.createTextNode(str(tif_file.RasterXSize))
         width.appendChild(width_txt)
         height = xmldoc.createElement('height')
-        height_txt = xmldoc.createTextNode('256')
+        height_txt = xmldoc.createTextNode(str(tif_file.RasterYSize))
         height.appendChild(height_txt)
         depth = xmldoc.createElement('depth')
         depth_txt = xmldoc.createTextNode('4')
@@ -141,7 +146,8 @@ def txtToXml(txt_path,xml_path):
                 if(index < datanum):
                     next_tif = txt_data[index].tifID
         else:
-            outputfile = str(number).zfill(9) + ".xml"
+            os.chdir(xml_path)
+            outputfile = str(txt_data[index].tifID).zfill(9) + ".xml"
             with open(outputfile,'wb') as fw:
                 fw.write(xmldoc.toprettyxml(indent='\t', encoding='utf-8'))
             fw.close()
@@ -149,15 +155,15 @@ def txtToXml(txt_path,xml_path):
 
         # create the output file
         os.chdir(xml_path)
-        outputfile = str(number).zfill(9) + ".xml"
+        outputfile = str(txt_data[index-4].tifID).zfill(9) + ".xml"
         with open(outputfile,'wb') as fw:
             fw.write(xmldoc.toprettyxml(indent='\t', encoding='utf-8'))
         fw.close()
-        number += 1
 
 
 if __name__ == "__main__":
     data_path = os.path.join(os.getcwd(),'Sample_Corner_Point.txt')
+    Tif_path = os.path.join(os.getcwd(),'tif floder')
     pic_path = os.path.join(os.getcwd(), 'result')
-    txtToXml(data_path,pic_path)
+    txtToXml(data_path,pic_path,Tif_path)
 
