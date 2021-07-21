@@ -111,6 +111,7 @@ def txtToXml(txt_path,xml_path,tif_path):
         source.appendChild(source_annotation)
         annotation.appendChild(source)
 
+        # get width and height from .tif
         size = xmldoc.createElement('size')
         width = xmldoc.createElement('width')
         width_txt = xmldoc.createTextNode(str(tif_file.RasterXSize))
@@ -159,6 +160,9 @@ def txtToXml(txt_path,xml_path,tif_path):
         with open(outputfile,'wb') as fw:
             fw.write(xmldoc.toprettyxml(indent='\t', encoding='utf-8'))
         fw.close()
+
+        #close the tif file
+        tif_file = None
 
 
 if __name__ == "__main__":
