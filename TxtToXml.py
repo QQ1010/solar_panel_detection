@@ -89,9 +89,9 @@ def txtToXml(txt_path,xml_path,tif_path):
     # make the xml
     # range need to change according to the number of xml
     index = 0
+    os.chdir(tif_path)
+    tif_file = gdal.Open('Sample50_1.tif')
     while(index < datanum):
-        os.chdir(tif_path)
-        tif_file = gdal.Open('Sample50_' + str(txt_data[index].tifID) +'.tif')
 
         xmldoc = Document()
 
@@ -161,8 +161,8 @@ def txtToXml(txt_path,xml_path,tif_path):
             fw.write(xmldoc.toprettyxml(indent='\t', encoding='utf-8'))
         fw.close()
 
-        #close the tif file
-        tif_file = None
+    #close the tif file
+    tif_file = None
 
 
 if __name__ == "__main__":
