@@ -28,7 +28,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_da68abd2dac4432baec873964f92872b {
+                #map {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -40,7 +40,7 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_da68abd2dac4432baec873964f92872b" ></div>
+            <div class="folium-map" id="map" ></div>
         
 </body>
 <script src="https://npmcdn.com/leaflet@1.6.0/dist/leaflet.js"></script>
@@ -48,8 +48,8 @@
 <script>    
             
     
-            var map_da68abd2dac4432baec873964f92872b = L.map(
-                "map_da68abd2dac4432baec873964f92872b",
+            var map = L.map(
+                "map",
                 {
                     center: [23.450648316816473, 120.40191650390626],
                     crs: L.CRS.EPSG3857,
@@ -66,7 +66,7 @@
             var tile_layer_89fe780848d24aadb58150b1a7710c0d = L.tileLayer(
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_da68abd2dac4432baec873964f92872b);
+            ).addTo(map);
         
     
 
@@ -82,10 +82,21 @@
         function geo_json_72155ebafe374f919ab0a23941689cbb_add (data) {
             geo_json_72155ebafe374f919ab0a23941689cbb
                 .addData(data)
-                .addTo(map_da68abd2dac4432baec873964f92872b);
+            map.addLayer(geo_json_72155ebafe374f919ab0a23941689cbb);
         }
-            geo_json_72155ebafe374f919ab0a23941689cbb_add({"features": [{"geometry": {"coordinates": [[[120.2835627, 23.5746704], [120.2835631, 23.5746026], [120.2837951, 23.5746037], [120.2837947, 23.5746714], [120.2835627, 23.5746704]]], "type": "Polygon"}, "properties": {"FID": 0}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2859315, 23.5768438], [120.2859342, 23.5763292], [120.2862388, 23.5763306], [120.2862361, 23.5768452], [120.2859315, 23.5768438]]], "type": "Polygon"}, "properties": {"FID": 1}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3156433, 23.5770001], [120.315655, 23.574736], [120.3181053, 23.5747467], [120.3180936, 23.5770109], [120.3156433, 23.5770001]]], "type": "Polygon"}, "properties": {"FID": 2}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3181081, 23.5770109], [120.3181106, 23.5765391], [120.3184057, 23.5765404], [120.3184033, 23.5770122], [120.3181081, 23.5770109]]], "type": "Polygon"}, "properties": {"FID": 3}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2736641, 23.5767847], [120.2736672, 23.5762227], [120.2739924, 23.5762242], [120.2739894, 23.5767863], [120.2736641, 23.5767847]]], "type": "Polygon"}, "properties": {"FID": 4}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2740416, 23.5761657], [120.2740435, 23.5758136], [120.2741667, 23.5758141], [120.2741648, 23.5761663], [120.2740416, 23.5761657]]], "type": "Polygon"}, "properties": {"FID": 5}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2785723, 23.5767557], [120.278576, 23.576074], [120.2788884, 23.5760754], [120.2788847, 23.5767571], [120.2785723, 23.5767557]]], "type": "Polygon"}, "properties": {"FID": 6}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2791656, 23.5751647], [120.2791687, 23.5745959], [120.2804856, 23.574602], [120.2804825, 23.5751708], [120.2791656, 23.5751647]]], "type": "Polygon"}, "properties": {"FID": 7}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.296051, 23.5769036], [120.296063, 23.5746552], [120.2985131, 23.5746663], [120.2985011, 23.5769146], [120.296051, 23.5769036]]], "type": "Polygon"}, "properties": {"FID": 8}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2985013, 23.5769146], [120.2985132, 23.5746663], [120.3009633, 23.5746774], [120.3009514, 23.5769257], [120.2985013, 23.5769146]]], "type": "Polygon"}, "properties": {"FID": 9}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2883611, 23.5768482], [120.2883641, 23.5762974], [120.2886933, 23.5762989], [120.2886904, 23.5768497], [120.2883611, 23.5768482]]], "type": "Polygon"}, "properties": {"FID": 10}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2887072, 23.5768837], [120.2887083, 23.5766692], [120.2891479, 23.5766712], [120.2891468, 23.5768857], [120.2887072, 23.5768837]]], "type": "Polygon"}, "properties": {"FID": 11}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3107453, 23.5769807], [120.3107571, 23.5747166], [120.3132073, 23.5747274], [120.3131956, 23.5769916], [120.3107453, 23.5769807]]], "type": "Polygon"}, "properties": {"FID": 12}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3133315, 23.5757212], [120.3133362, 23.5748206], [120.3152979, 23.5748292], [120.3152932, 23.5757299], [120.3133315, 23.5757212]]], "type": "Polygon"}, "properties": {"FID": 13}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3082008, 23.5747865], [120.3082011, 23.5747301], [120.3082855, 23.5747304], [120.3082853, 23.5747869], [120.3082008, 23.5747865]]], "type": "Polygon"}, "properties": {"FID": 14}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3083065, 23.5769022], [120.3083115, 23.5759405], [120.3105128, 23.5759503], [120.3105077, 23.5769119], [120.3083065, 23.5769022]]], "type": "Polygon"}, "properties": {"FID": 15}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3011811, 23.5769357], [120.301193, 23.5746874], [120.303286, 23.5746968], [120.3032742, 23.5769451], [120.3011811, 23.5769357]]], "type": "Polygon"}, "properties": {"FID": 16}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3033994, 23.5769457], [120.3034112, 23.5746974], [120.3058615, 23.5747083], [120.3058497, 23.5769567], [120.3033994, 23.5769457]]], "type": "Polygon"}, "properties": {"FID": 17}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2911529, 23.5768881], [120.2911651, 23.5746239], [120.2936152, 23.5746351], [120.2936031, 23.5768992], [120.2911529, 23.5768881]]], "type": "Polygon"}, "properties": {"FID": 18}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2936031, 23.5768992], [120.2936152, 23.5746351], [120.2960653, 23.5746462], [120.2960532, 23.5769103], [120.2936031, 23.5768992]]], "type": "Polygon"}, "properties": {"FID": 19}, "type": "Feature"}], "name": "output", "type": "FeatureCollection"});
-
+        
+        // 控制資料在放大到zoom = 14時才會顯示
+        function geo_json_zoom() {
+            zoomLevel = map.getZoom();
+            if(zoomLevel === 14) {
+                geo_json_72155ebafe374f919ab0a23941689cbb_add({"features": [{"geometry": {"coordinates": [[[120.2835627, 23.5746704], [120.2835631, 23.5746026], [120.2837951, 23.5746037], [120.2837947, 23.5746714], [120.2835627, 23.5746704]]], "type": "Polygon"}, "properties": {"FID": 0}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2859315, 23.5768438], [120.2859342, 23.5763292], [120.2862388, 23.5763306], [120.2862361, 23.5768452], [120.2859315, 23.5768438]]], "type": "Polygon"}, "properties": {"FID": 1}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3156433, 23.5770001], [120.315655, 23.574736], [120.3181053, 23.5747467], [120.3180936, 23.5770109], [120.3156433, 23.5770001]]], "type": "Polygon"}, "properties": {"FID": 2}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3181081, 23.5770109], [120.3181106, 23.5765391], [120.3184057, 23.5765404], [120.3184033, 23.5770122], [120.3181081, 23.5770109]]], "type": "Polygon"}, "properties": {"FID": 3}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2736641, 23.5767847], [120.2736672, 23.5762227], [120.2739924, 23.5762242], [120.2739894, 23.5767863], [120.2736641, 23.5767847]]], "type": "Polygon"}, "properties": {"FID": 4}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2740416, 23.5761657], [120.2740435, 23.5758136], [120.2741667, 23.5758141], [120.2741648, 23.5761663], [120.2740416, 23.5761657]]], "type": "Polygon"}, "properties": {"FID": 5}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2785723, 23.5767557], [120.278576, 23.576074], [120.2788884, 23.5760754], [120.2788847, 23.5767571], [120.2785723, 23.5767557]]], "type": "Polygon"}, "properties": {"FID": 6}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2791656, 23.5751647], [120.2791687, 23.5745959], [120.2804856, 23.574602], [120.2804825, 23.5751708], [120.2791656, 23.5751647]]], "type": "Polygon"}, "properties": {"FID": 7}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.296051, 23.5769036], [120.296063, 23.5746552], [120.2985131, 23.5746663], [120.2985011, 23.5769146], [120.296051, 23.5769036]]], "type": "Polygon"}, "properties": {"FID": 8}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2985013, 23.5769146], [120.2985132, 23.5746663], [120.3009633, 23.5746774], [120.3009514, 23.5769257], [120.2985013, 23.5769146]]], "type": "Polygon"}, "properties": {"FID": 9}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2883611, 23.5768482], [120.2883641, 23.5762974], [120.2886933, 23.5762989], [120.2886904, 23.5768497], [120.2883611, 23.5768482]]], "type": "Polygon"}, "properties": {"FID": 10}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2887072, 23.5768837], [120.2887083, 23.5766692], [120.2891479, 23.5766712], [120.2891468, 23.5768857], [120.2887072, 23.5768837]]], "type": "Polygon"}, "properties": {"FID": 11}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3107453, 23.5769807], [120.3107571, 23.5747166], [120.3132073, 23.5747274], [120.3131956, 23.5769916], [120.3107453, 23.5769807]]], "type": "Polygon"}, "properties": {"FID": 12}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3133315, 23.5757212], [120.3133362, 23.5748206], [120.3152979, 23.5748292], [120.3152932, 23.5757299], [120.3133315, 23.5757212]]], "type": "Polygon"}, "properties": {"FID": 13}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3082008, 23.5747865], [120.3082011, 23.5747301], [120.3082855, 23.5747304], [120.3082853, 23.5747869], [120.3082008, 23.5747865]]], "type": "Polygon"}, "properties": {"FID": 14}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3083065, 23.5769022], [120.3083115, 23.5759405], [120.3105128, 23.5759503], [120.3105077, 23.5769119], [120.3083065, 23.5769022]]], "type": "Polygon"}, "properties": {"FID": 15}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3011811, 23.5769357], [120.301193, 23.5746874], [120.303286, 23.5746968], [120.3032742, 23.5769451], [120.3011811, 23.5769357]]], "type": "Polygon"}, "properties": {"FID": 16}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.3033994, 23.5769457], [120.3034112, 23.5746974], [120.3058615, 23.5747083], [120.3058497, 23.5769567], [120.3033994, 23.5769457]]], "type": "Polygon"}, "properties": {"FID": 17}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2911529, 23.5768881], [120.2911651, 23.5746239], [120.2936152, 23.5746351], [120.2936031, 23.5768992], [120.2911529, 23.5768881]]], "type": "Polygon"}, "properties": {"FID": 18}, "type": "Feature"}, {"geometry": {"coordinates": [[[120.2936031, 23.5768992], [120.2936152, 23.5746351], [120.2960653, 23.5746462], [120.2960532, 23.5769103], [120.2936031, 23.5768992]]], "type": "Polygon"}, "properties": {"FID": 19}, "type": "Feature"}], "name": "output", "type": "FeatureCollection"});
+            }
+            else if(zoomLevel < 14) {
+                map.removeLayer(geo_json_72155ebafe374f919ab0a23941689cbb);
+            }
+        };
+        map.addEventListener('zoom',geo_json_zoom);
+        
         // 隨便點擊地可上任一地方，就會出現座標
         const popup = L.popup();
         function onMapClick(e) {
@@ -94,9 +105,9 @@
             popup
                 .setLatLng(e.latlng)
                 .setContent(`緯度：${lat}<br/>經度：${lng}`)
-                .openOn(map_da68abd2dac4432baec873964f92872b);
+                .openOn(map);
             }
-        map_da68abd2dac4432baec873964f92872b.on('click', onMapClick);
+        map.on('click', onMapClick);
         //群聚的座標集合、邊界
         //隨機在最小和最大值中產生數值
         function random(min, max) {
@@ -121,6 +132,6 @@
             .bindPopup(`<p>太陽能板面積: </p>`))  //資訊視窗
             .forEach(item => markers.addLayer(item));                   //把marker加入L.mmarkweClusterGroup中
 
-        map_da68abd2dac4432baec873964f92872b.addLayer(markers);
+        map.addLayer(markers);
 
 </script>
