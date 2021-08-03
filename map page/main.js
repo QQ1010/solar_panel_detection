@@ -1,15 +1,17 @@
+
+//建立空白地圖
 const center = [23.9975423,121.0795833];
 var map = L.map('map', {
     center: center,
     zoom: 8
 });
-
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+// const center = [23.450648316816473, 120.40191650390626]
 
-//產生marler
+//產生marker
 const marker = L.marker(center,{
     title:'跟 <a> 的 title 一樣', // 跟 <a> 的 title 一樣
     opacity:1.0
@@ -54,3 +56,15 @@ arr.map(item => L.marker(new L.LatLng(item.y , item.x))    //新增marker
 
 map.addLayer(markers);
 
+// 控制右上角選單按鈕
+$("#btn-open").click(function() {
+    $("#modal").css("opacity",0.8);
+    $("#modal").css("zIndex",1000);
+    $("#btn-open").css("zIndex",-1);
+});
+
+$("#btn-close").click(function () {
+    $("#modal").css("opacity", 0);
+    $("#modal").css("zIndex", -1);
+    $("#btn-open").css("zIndex", 2);
+  });

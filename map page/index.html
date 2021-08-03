@@ -8,9 +8,21 @@
     <!--加入MarkerCluster的css和js-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <ul>
+      <li><img src="http://www.phys.sinica.edu.tw/images/sinica_logo.png"></li>
+      <li><a href="https://www.sinica.edu.tw/ch">中央研究院</a></li>
+      <li><c>太陽能板分布</c></li>
+    </ul>
   </head>
   <body>
     <div id="map"></div>
+    <button id="btn-open">開啟選單</button>
+    <div id="modal">
+      <button id="btn-close">關閉選單</button>
+      <div id="chart--line"></div>
+      <div id="chart--bar"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://npmcdn.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script src="main.js"></script>
